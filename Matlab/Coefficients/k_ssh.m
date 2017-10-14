@@ -7,13 +7,16 @@ function [VT, VV_N2, VV_O2, VV_NO] = k_ssh(sp,T)
 % Chemical Processes in Gas Dynamics: Cross Sections and Rate Constants, Vol.1
 
 % INPUT:
+%
 % sp -- chemical specie sp = 1, 2, 3 (1 = N2, 2 = O2, 3 = NO)
 % T  -- temperature
 
 % OUTPUT:
-% VT   -- k_{c, i+1->i}^M, size(VT) = I(SW_O, c) - 1 5
-% VV_c -- k_{c, i+1->i}^{d, m->m+1}, d = N2, O2, NO, 
-%         size(VV_c) = I(SW_O, c) - 1 I(SW_O, d) - 1
+%
+% VT   -- k_{c, i+1->i}^M, , m^3/s, 
+%         size(VT) = I(SW_O, c), 5
+% VV_c -- k_{sp, i+1->i}^{c, m->m+1}, m^3/s,
+%         size(VV_c) = I(SW_O, sp), I(SW_O, c)
 
 global M C K H W WX SW_O I
 
