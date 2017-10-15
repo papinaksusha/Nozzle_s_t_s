@@ -53,7 +53,6 @@ Zn = (d(sp) + d).^2.*sqrt(pi*K*T/2./mu);                                   % col
 k10 = P10.*Zn;
 
 i = {0 : I(SW_O,1) - 1, 0 : I(SW_O,2) - 1, 0 : I(SW_O,3) - 1};
-
 dE = H*C.*WX(sp);
 E1 = H*C.*(W(sp) - 2*WX(sp));
 
@@ -62,6 +61,7 @@ if SW_O == 1
 else
         gamma0 = 2*pi^2.*E1./alpha./H.*sqrt(0.5.*mu./K./T);
         g_i = (2*pi^2.*(E1 - 2.*cell2mat(i(sp)).*dE))'*(alpha.*H./sqrt(0.5.*mu./K./T)).^(-1);
+      %  g_i = pi*(W(sp) - 2.*(cell2mat(i(sp)) + 1).*WX(sp))'*(alpha.*sqrt(0.5.*mu./K./T)).^(-1); % из справочника
         deltaVT = zeros(I(SW_O,sp),5);
         l = find(g_i >= 20);
         ll = find(g_i < 20);
@@ -86,19 +86,21 @@ VV = cell(1,3);
 
 if SW_O == 1
     for l = 1:3
-        VV(l) = {(cell2mat(i(sp)) + 1)'*(cell2mat(i(l)) + 1).*k1001(l)};
+       VV(l) = {(cell2mat(i(sp)) + 1)'*(cell2mat(i(l)) + 1).*k1001(l)};
     end
 else
     deltaVV = 8/3*pi^2*dE/H/alpha(sp)*sqrt(mu(sp)/2/K/T);
+    %deltaVV = 4/3*pi*WX(sp)./alpha(sp)*sqrt(mu(sp)/2/K/T);
     for l = 1:3
         if (l == sp)
             A = cell2mat(i(sp))'*ones(1,I(SW_O,sp)) - ...
                 ones(I(SW_O,sp),1)*cell2mat(i(sp));
             VV(l) = {(cell2mat(i(sp)) + 1)'*(cell2mat(i(l)) + 1).*k1001(l).* ...
                 exp(-deltaVV.*abs(A)).*(1.5 - 0.5.*exp(-deltaVV.*abs(A))).* ...
-                exp(A'*dE/K/T)};
+                exp(A'.*H.*C.*WX(sp)./K./T)};
         else
             deltaVVs = 8/3*pi^2*C*WX(l)/alpha(l)*sqrt(mu(l)/2/K/T);
+            %deltaVVs = 4/3*pi*WX(l)./alpha(l)*sqrt(mu(l)/2/K/T);
             p = (W(sp) - W(l) - 2*(WX(l) - WX(sp)))/2/WX(sp);
             A = deltaVVs.*ones(I(SW_O,sp) , 1)*cell2mat(i(l)) - ...
             deltaVV.*cell2mat(i(sp))'*ones(1 , I(SW_O,l)) + ...

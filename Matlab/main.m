@@ -4,6 +4,8 @@ clc
 clear 
 close all
 format long e
+addpath(('./MAT/'))
+addpath(('./ODE_systems/')) % переписать кросс-платформенно
 addpath(('./Coefficients/'))
 
 global NA K H C W WX M THETA_R D I SW_O SW_N EX_MODEL MOLAR REC
@@ -48,5 +50,5 @@ fig = 1;
 % TEST_DISS_TM;
 % TEST_EXCHANGE
 
-% call5;
+ call5;
 % call2;
