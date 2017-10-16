@@ -9,7 +9,7 @@ l_T = l_v + 1;
 x_N = 0.01;
 x = 0 : x_N : 50;
 %x = [0,50];
-T_cr = 7000;
+T_cr = 5000;
 p_cr = 1*101325;
 n_cr = p_cr/K/T_cr; 
 n_N2_cr = 0.79;
@@ -34,7 +34,7 @@ init(l_N2 + 1 : l_N2 + l_O2) = n_O2_cr/Z_vibr_O2.*exp(-e_i_O2./K./T_cr);
 init(l_v : l_T) = 1;
 v_cr = v_critical([sum(init(1 : l_N2)) sum(l_N2 + 1 : l_N2 + l_O2) ...
                    init(l_mol) init(l_mol + 1) init(l_c)] , T_cr);
-v_cr = v_cr + v_cr*0.2;
+v_cr = v_cr + v_cr*0.5;
 
 %v_cr = 2000;
 
@@ -55,9 +55,6 @@ n_O = Y(: , l_c)./sum(Y(: , 1 : l_c) , 2);
 v = Y(: , l_v).*v_cr;
 T = Y(: , l_T).*T_cr;
 
-filename = strcat('./MAT/NOZ', num2str(SW_N), '_', num2str(p_cr/101325), '_' , num2str(T_cr), '_', 'OSC', ...
-           num2str(SW_O), '_', 'EX', num2str(EX_MODEL), '_', 'REC', num2str(REC), '_','.mat');
-save(filename, 'n_i_N2', 'n_i_O2', 'n_N2', 'n_O2', 'n_NO', 'n_N', 'n_O', 'v', 'T')
 
 figure(1)
 plot(X , T);
@@ -117,6 +114,10 @@ xlabel('x/_r*');
 xlim([0,5]);
 %ylim([1e-5,1]);
 
+
+filename = strcat('./MAT/NOZ', num2str(SW_N), '_', num2str(p_cr/101325), '_' , num2str(T_cr), '_', 'OSC', ...
+           num2str(SW_O), '_', 'EX', num2str(EX_MODEL), '_', 'REC', num2str(REC), '_','.mat');
+save(filename, 'X', 'n_i_N2', 'n_i_O2', 'n_N2', 'n_O2', 'n_NO', 'n_N', 'n_O', 'v', 'T','u_N2','u_O2','e_i_N2', 'e_i_O2', 'i_N2', 'i_O2')
 %% conservation laws
 
 N_init = [sum(init(1 : l_N2)) sum(init(l_N2 + 1 : l_N2 + l_O2)) ...

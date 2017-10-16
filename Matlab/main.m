@@ -27,7 +27,7 @@ M = 1.6605402e-24.*MOLAR;                                                  % kg,
 THETA_R = [2.86 2.07 2.42];                                                % K, characteristic rotational emperature
 D = H*C.*[7.871e6 4.126e6 5.24e6];                                         % J, dissociation energy
 
-SW_O = 2;                                                                  % switch on oscillator, 1 -  harmonic oscillator; 2 -  anharmonic oscillator
+SW_O = 1;                                                                  % switch on oscillator, 1 -  harmonic oscillator; 2 -  anharmonic oscillator
 SW_N = 1;                                                                  % switcn on nozzle
 EX_MODEL = 3;                                                              % exchange rate coefficients model
 REC = 1;                                                                   % rec = 0 - without recombination   

@@ -215,11 +215,11 @@ n_cr = p_cr/K/T_cr;
     %    k_ex_N2_r = zeros(I(SW_O,1) + 1,4);
     %    k_ex_N2_r(4:5,4) = 0.9e-17*T_d/300;
     %else
-    k_ex_N2_r = k_ex_N2.*(MM(1)*MM(5)/MM(3)/MM(4))^(1.5).*...
+    k_ex_N2_r = k_ex_N2.*(M(1)*M(5)/M(3)/M(4))^(1.5).*...
                     THETA_R(3)/THETA_R(1)*0.5.*exp(- e_i_N2'*ones(1 , 5)./T + D(1)/K/T_d - D(3)/K/T_d);
    % end
     
-    k_ex_O2_r = k_ex_O2.*(MM(2)*MM(4)/MM(3)/MM(5))^(1.5).*...
+    k_ex_O2_r = k_ex_O2.*(M(2)*M(4)/M(3)/M(5))^(1.5).*...
                      THETA_R(3)/THETA_R(2)*0.5.*exp(- e_i_O2'*ones(1 , 5)./T + D(2)/K/T_d - D(3)/K/T_d);
     
     R_N2_ex = n_NO_d*n_N_d.*k_ex_N2_r(: , EX_MODEL) - n_N2_d.*n_O_d.*k_ex_N2(: , EX_MODEL); %48*1
@@ -241,12 +241,12 @@ n_cr = p_cr/K/T_cr;
     k_diss_NO(1:3) = 0.41e12/NA*T_d^(-1)*exp(- D(3)/K/T_d);
     k_diss_NO(4:5) = 0.3e12/NA*T_d^(0.5)*exp(- D(3)/K/T_d);
     
-    k_rec_N2 = REC.*k_diss_N2.*(MM(1)/MM(4)^2)^(1.5).*H^3.*(2*pi*K*T_d)^(- 1.5).*...
+    k_rec_N2 = REC.*k_diss_N2.*(M(1)/M(4)^2)^(1.5).*H^3.*(2*pi*K*T_d)^(- 1.5).*...
                 T_d./THETA_R(1).*0.5.*exp(- e_i_N2'*ones(1 , 5)./T + D(1)/K/T_d); 
-    k_rec_O2 = REC.*k_diss_O2.*(MM(2)/MM(5)^2)^(1.5).*H^3.*(2*pi*K*T_d)^(- 1.5).*...
+    k_rec_O2 = REC.*k_diss_O2.*(M(2)/M(5)^2)^(1.5).*H^3.*(2*pi*K*T_d)^(- 1.5).*...
                T_d./THETA_R(2).*0.5.*exp(- e_i_O2'*ones(1 , 5)./T + D(2)/K/T_d);
     %Z_NO_int = sum(exp(-e_i_NO./T))*T_d/THETA_R(3);
-    k_rec_NO = REC.*k_diss_NO.*(MM(3)/MM(4)/MM(5))^(1.5)*H^3*(2*pi*K*T_d)^(-1.5)*T_d./THETA_R(3)*exp(D(3)/K/T_d);
+    k_rec_NO = REC.*k_diss_NO.*(M(3)/M(4)/M(5))^(1.5)*H^3*(2*pi*K*T_d)^(-1.5)*T_d./THETA_R(3)*exp(D(3)/K/T_d);
     
     R_N2_diss = sum(n_c_N2.*(n_N_d^2.*k_rec_N2 - n_N2_d.*k_diss_N2) , 2);
     R_O2_diss = sum(n_c_O2.*(n_O_d^2.*k_rec_O2 - n_O2_d.*k_diss_O2) , 2);
