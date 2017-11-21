@@ -51,6 +51,7 @@ P10 = 1.294.*R./Z0./(1 + 1.1.*eps(sp,:)./T).*8.*pi^3.*mu.*omega./...       % the
       alpha.^2./H.*sqrt(4*pi/3.*hi).*exp(-3.*hi + H*omega/4/pi/K/T + eps(sp,:)./T);
 Zn = (d(sp) + d).^2.*sqrt(pi*K*T/2./mu);                                   % collision frequency per unit number density
 k10 = P10.*Zn;
+%VT_N2_to_O2 = P10(1)/P10(2)
 
 i = {0 : I(SW_O,1) - 1, 0 : I(SW_O,2) - 1, 0 : I(SW_O,3) - 1};
 dE = H*C.*WX(sp);
@@ -82,6 +83,8 @@ lambda2 = 0.5;
 Q1001 = lambda1^2*lambda2^2*4.*alpha(1:3).^2.*K.*T./omega^2./m_r(sp);      % the averaged probability for the VV transition A(1) + B(0) -> A(0) + B(1)
 k1001 = Q1001.*Zn(1:3);
 
+%VV_N2_to_O2 = Q1001(1)/Q1001(2)
+
 VV = cell(1,3);                                                            
 
 if SW_O == 1
@@ -112,6 +115,9 @@ else
         end
      end
 end
+
+%N2 = P10(1)/Q1001(1)
+%O2 = P10(2)/Q1001(2)
 
 VV_N2 = cell2mat(VV(1));
 VV_O2 = cell2mat(VV(2));

@@ -10,13 +10,15 @@ def save(name='', fmt='png'):
     if not os.path.exists(path):
         os.mkdir(path)
     os.chdir(path)
-    plt.savefig('{}.{}'.format(name, fmt), fmt='png')
+    plt.savefig('{}.{}'.format(name, fmt), fmt='png')#, bbox_inches='tight')
     os.chdir(pwd)
 
 matname1_7000 = 'NOZ1_1_7000_OSC2_EX3_REC1_'
 matname1_5000 = 'NOZ1_1_5000_OSC2_EX3_REC1_'
 matname100_7000 = 'NOZ1_100_7000_OSC2_EX3_REC1_'
 matname100_5000 = 'NOZ1_100_5000_OSC2_EX3_REC1_'
+labelsize = 22
+legendsize = 22
 
 plt.rc('font',**{'family':'serif'})
 plt.rc('text', usetex=True)
@@ -45,19 +47,28 @@ X1007 = data100_7000['X']
 X15 = data1_5000['X']
 X1005 = data100_5000['X']
 
+
+#Teps7 = max(abs(T17 - T1007)/T17)*100
+#veps7 = max(abs(V17 - V1007)/V17)*100
+#Teps5 = max(abs(T15 - T1005)/T15)*100
+#veps5 = max(abs(V15 - V1005)/V15)*100
+
+#print('Teps7 = ', Teps7, 'veps7 = ', veps7)
+#print('Teps5 = ', Teps5, 'veps5 = ', veps5)
+
 plt.figure()
 
-plt.plot(X17, T17, 'r', label=r'$T^* = 7000$ K, $p^* = 1$ atm')
-plt.plot(X1007, T1007, 'r--', label=r'$T^* = 7000$ K, $p^* = 100$ atm')
-plt.plot(X15, T15, 'b', label=r'$T^* = 5000$ K, $p^* = 1$ atm$')
-plt.plot(X1005, T1005, 'b--', label=r'$T^* = 5000$ K, $p^* = 100$ atm')
+plt.plot(X17, T17, 'r', label=r'$T^* = 7000$ K, $p^* = 1$ атм')
+plt.plot(X1007, T1007, 'r--', label=r'$T^* = 7000$ K, $p^* = 100$ атм')
+plt.plot(X15, T15, 'b', label=r'$T^* = 5000$ K, $p^* = 1$ атм$')
+plt.plot(X1005, T1005, 'b--', label=r'$T^* = 5000$ K, $p^* = 100$ атм')
 
-plt.xlabel(r'$x/r^*$', fontsize=16)
-plt.ylabel(r'$T$, K', rotation=0, fontsize=16)
-plt.gca().yaxis.set_label_coords(0.05, 1)
-plt.gca().xaxis.set_label_coords(1.05, 0.05)
-plt.legend(loc=1, fontsize=18)
-plt.tick_params(labelsize=14)
+plt.xlabel(r'$x/r^*$', fontsize=labelsize)
+plt.ylabel(r'$T$, K', rotation=0, fontsize=labelsize)
+plt.gca().yaxis.set_label_coords(0.07, 1)
+plt.gca().xaxis.set_label_coords(1.07, 0.07)
+plt.legend(loc=1, fontsize=legendsize)
+plt.tick_params(labelsize=labelsize)
 plt.gca().set_xlim([min(X17), max(X17)])
 plt.gca().set_ylim([0, 7000])
 
@@ -75,12 +86,12 @@ plt.plot(X1007, V1007, 'r--', label=r'$T^* = 7000$ K, $p^* = 100$ atm')
 plt.plot(X15, V15, 'b', label=r'$T^* = 5000$ K, $p^* = 1$ atm$')
 plt.plot(X1005, V1005, 'b--', label=r'$T^* = 5000$ K, $p^* = 100$ atm')
 
-plt.xlabel(r'$x/r^*$', fontsize=16)
-plt.ylabel(r'$v$, ' + u'м/с', rotation=0, fontsize=16)
-plt.gca().yaxis.set_label_coords(0.05, 1)
-plt.gca().xaxis.set_label_coords(1.05, 0.05)
-plt.legend(loc=0, fontsize=18)
-plt.tick_params(labelsize=14)
+plt.xlabel(r'$x/r^*$', fontsize=labelsize)
+plt.ylabel(r'$v$, ' + u'м/с', rotation=0, fontsize=labelsize)
+plt.gca().yaxis.set_label_coords(0.07, 1)
+plt.gca().xaxis.set_label_coords(1.07, 0.07)
+plt.legend(loc=0, fontsize=legendsize)
+plt.tick_params(labelsize=labelsize)
 plt.gca().set_xlim([min(X17), max(X17)])
 plt.gca().set_ylim([1500, 4500])
 

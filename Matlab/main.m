@@ -8,7 +8,7 @@ addpath(('./MAT/'))
 addpath(('./ODE_systems/')) % переписать кросс-платформенно
 addpath(('./Coefficients/'))
 
-global NA K H C W WX M THETA_R D I SW_O SW_N EX_MODEL MOLAR REC
+global NA K H C W WX M THETA_R D I SW_O SW_N EX_MODEL MOLAR REC VV VT
 
 %% CONSTs
 
@@ -26,10 +26,12 @@ MOLAR = 1e-3.*[28.0134 31.99880 30.00610 14.0067 15.9994];                 % kg/
 M = 1.6605402e-24.*MOLAR;                                                  % kg, molecular mass
 THETA_R = [2.86 2.07 2.42];                                                % K, characteristic rotational emperature
 D = H*C.*[7.871e6 4.126e6 5.24e6];                                         % J, dissociation energy
+VV = 1;
+VT = 1;
 
-SW_O = 1;                                                                  % switch on oscillator, 1 -  harmonic oscillator; 2 -  anharmonic oscillator
+SW_O = 2;                                                                  % switch on oscillator, 1 -  harmonic oscillator; 2 -  anharmonic oscillator
 SW_N = 1;                                                                  % switcn on nozzle
-EX_MODEL = 3;                                                              % exchange rate coefficients model
+EX_MODEL = 2;                                                              % exchange rate coefficients model
 REC = 1;                                                                   % rec = 0 - without recombination   
 
 switch SW_O 
@@ -49,6 +51,7 @@ fig = 1;
 % TEST_SSH_ALEX
 % TEST_DISS_TM;
 % TEST_EXCHANGE
-
- call5;
+ VVprobability_compare
+ 
+% call5;
 % call2;

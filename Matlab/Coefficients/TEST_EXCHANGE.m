@@ -7,7 +7,7 @@ wwxx = WX;
 WX = [1432 1198 1407.5];
 
 N_T = 100;
-TT = 2000 : N_T : 14000;
+TT = 100 : N_T : 14000;
 
 k_ex_N2 = zeros(I(SW_O,1) + 1,5,length(TT));
 k_ex_O2 = zeros(I(SW_O,2) + 1,5,length(TT));
@@ -235,5 +235,64 @@ ylabel('lg(k_{NO,O2i}^{O,N})');
 xlabel('i');
 legend('1','2','3','4');
 fig = fig + 1;
+
+figure(fig)
+plot(cell2mat(i(1)), squeeze(log10(k_ex_N2(:,:,1))))
+title('T = 300 K');
+ylabel('lg(k_{N2i,NO}^{O,N})');
+xlabel('i');
+xlim([0, I(SW_O,1) - 1]);
+legend('1','2','3','4');
+fig = fig + 1;
+
+figure(fig)
+plot(cell2mat(i(1)), squeeze(log10(k_ex_N(:,:,1))))
+title('T = 300 K');
+ylabel('lg(k_{N2i,NO}^{O,N})');
+xlabel('i');
+xlim([0, I(SW_O,1) - 1]);
+legend('1','2','3','4');
+fig = fig + 1;
+
+figure(fig)
+plot(TT, squeeze(log10(k_ex_N2(35,:,:))))
+title('i = 40');
+ylabel('lg(k_{N2i,NO}^{O,N})');
+xlabel('T');
+legend('1','2','3','4');
+fig = fig + 1;
+
+figure(fig)
+plot(cell2mat(i(2)), squeeze(log10(k_ex_O2(:,:,(1000-TT(1))/N_T+1))))
+title('T = 300 K');
+ylabel('lg(k_{O2i,NO}^{N,O})');
+xlabel('i');
+legend('1','2','3','4');
+fig = fig + 1;
+
+figure(fig)
+plot(cell2mat(i(2)), squeeze(log10(k_ex_O(:,:,(1000-TT(1))/N_T+1))))
+title('T = 300 K');
+ylabel('lg(k_{NO, O2i}^{O,N})');
+xlabel('i');
+legend('1','2','3','4');
+fig = fig + 1;
+
+figure(fig)
+plot(cell2mat(i(1)), squeeze(log10(k_ex_N2(:,:,(1000-TT(1))/N_T+1))))
+title('T = 300 K');
+ylabel('lg(k_{N2i,NO}^{O,N})');
+xlabel('i');
+legend('1','2','3','4');
+fig = fig + 1;
+
+figure(fig)
+plot(cell2mat(i(1)), squeeze(log10(k_ex_N(:,:,(1000-TT(1))/N_T+1))))
+title('T = 300 K');
+ylabel('lg(k_{NO, N2i}^{N,O})');
+xlabel('i');
+legend('1','2','3','4');
+fig = fig + 1;
+
 SW_O = SW;
 WX = wwxx;

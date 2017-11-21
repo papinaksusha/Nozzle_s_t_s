@@ -1,6 +1,6 @@
 function [f1,f2] = Nozzle_5_full(x,init,options,T_cr,p_cr,v_cr)
 
-global K H C W WX M THETA_R D I SW_O SW_N EX_MODEL NA REC
+global K H C W WX M THETA_R D I SW_O SW_N EX_MODEL NA REC VV VT
 
 n_cr = p_cr/K/T_cr;
 
@@ -200,8 +200,8 @@ n_cr = p_cr/K/T_cr;
                   n_O2_d(3 : end)'*n_N2_d(2 : end-2).*k_O2_N2_VV(2 : end, :) - ...
                   n_O2_d(2 : end - 1)'*n_N2_d(3 : end - 1).*k_O2_N2_VV_r(2 : end, :) , 2);
     
-    R_N2_vibr = R_N2_VT + R_N2_VV + R_N2_VV_s; %48*1
-    R_O2_vibr = R_O2_VT + R_O2_VV + R_O2_VV_s; 
+    R_N2_vibr = VT*R_N2_VT + VV.*(R_N2_VV + R_N2_VV_s); %48*1
+    R_O2_vibr = VT.*R_O2_VT + VV.*(R_O2_VV + R_O2_VV_s); 
     
     % Exchange reactions
     

@@ -10,9 +10,11 @@ def save(name='', fmt='png'):
     if not os.path.exists(path):
         os.mkdir(path)
     os.chdir(path)
-    plt.savefig('{}.{}'.format(name, fmt), fmt='png')
+    plt.savefig('{}.{}'.format(name, fmt), fmt='png')#, bbox_inches='tight')
     os.chdir(pwd)
 
+labelsize = 22
+legendsize = 22
 matname1 = 'NOZ1_1_7000_OSC2_EX3_REC1_'
 matname2 = 'NOZ2_1_7000_OSC2_EX3_REC1_'
 matname3 = 'NOZ3_1_7000_OSC2_EX3_REC1_'
@@ -43,19 +45,21 @@ X1 = data1['X']
 X2 = data2['X']
 X3 = data3['X']
 
+# T
+
 plt.figure()
 
 plt.plot(X1, T1, 'k', label=u'коническое')
 plt.plot(X2, T2, 'b', label=u'гиперболическое')
 plt.plot(X3, T3, 'r', label=u'F4')
 
-plt.xlabel(r'$x/r^*$', fontsize=16)
-plt.ylabel(r'$T$, K', rotation=0, fontsize=16)
+plt.xlabel(r'$x/r^*$', fontsize=labelsize)
+plt.ylabel(r'$T$, K', rotation=0, fontsize=labelsize)
 plt.gca().yaxis.set_label_coords(0.05, 1)
-plt.gca().xaxis.set_label_coords(1.05, 0.05)
+plt.gca().xaxis.set_label_coords(1.07, 0.07)
 #plt.legend(loc='upper right', bbox_to_anchor=(1, 0.9), fontsize=18)
-plt.legend(loc='upper right', fontsize=18)
-plt.tick_params(labelsize=14)
+plt.legend(loc='upper right', fontsize=legendsize)
+plt.tick_params(labelsize=labelsize)
 plt.gca().set_xlim([0, 50])
 plt.gca().set_ylim([0, 7000])
 
@@ -71,13 +75,14 @@ plt.plot(X2, n_N22, 'b', label=u'гиперболическое')
 plt.plot(X3, n_N23, 'r', label=u'F4')
 
 plt.title(r'$\mathrm{N}_2$', fontsize=24)
-plt.xlabel(r'$x/r^*$', fontsize=16)
-plt.ylabel(r'$n_{\mathrm{N}_2}/n$', rotation=0, fontsize=16)
-plt.gca().yaxis.set_label_coords(0.05, 1)
-plt.gca().xaxis.set_label_coords(1.05, 0.05)
-plt.legend(loc='upper right', bbox_to_anchor=(1, 0.9), fontsize=18)
-plt.tick_params(labelsize=14)
+plt.xlabel(r'$x/r^*$', fontsize=labelsize)
+plt.ylabel(r'$n_{\mathrm{N}_2}/n$', rotation=0, fontsize=labelsize)
+plt.gca().yaxis.set_label_coords(0.07, 1)
+plt.gca().xaxis.set_label_coords(1.07, 0.07)
+plt.legend(loc='upper right', bbox_to_anchor=(1, 0.9), fontsize=legendsize)
+plt.tick_params(labelsize=labelsize)
 plt.gca().set_xlim([0, 5])
+plt.locator_params(axis='y', numticks=10)
 #plt.gca().set_ylim([n_O21007.min(), n_O21007.max()])
 
 save(name='N2_shapes', fmt='pdf')
@@ -93,12 +98,13 @@ plt.plot(X2, n_O22, 'b', label=u'гиперболическое')
 plt.plot(X3, n_O23, 'r', label=u'F4')
 
 plt.title(r'$\mathrm{O}_2$', fontsize=24)
-plt.xlabel(r'$x/r^*$', fontsize=16)
-plt.ylabel(r'$n_{\mathrm{O}_2}/n$', rotation=0, fontsize=16)
-plt.gca().yaxis.set_label_coords(0.05, 1)
-plt.gca().xaxis.set_label_coords(1.05, 0.05)
-plt.legend(loc='upper right', bbox_to_anchor=(1, 0.9), fontsize=18)
-plt.tick_params(labelsize=14)
+plt.xlabel(r'$x/r^*$', fontsize=labelsize)
+plt.ylabel(r'$n_{\mathrm{O}_2}/n$', rotation=0, fontsize=labelsize)
+plt.gca().yaxis.set_label_coords(0.07, 1)
+plt.gca().xaxis.set_label_coords(1.07, 0.07)
+plt.legend(loc='upper right', bbox_to_anchor=(1, 0.9), fontsize=legendsize)
+plt.tick_params(labelsize=labelsize)
+plt.locator_params(axis='y', numticks=10)
 plt.gca().set_xlim([0, 5])
 #plt.gca().set_ylim([n_O21007.min(), n_O21007.max()])
 
