@@ -34,9 +34,10 @@ init(l_N2 + 1 : l_N2 + l_O2) = n_O2_cr/Z_vibr_O2.*exp(-e_i_O2./K./T_cr);
 init(l_v : l_T) = 1;
 v_cr = v_critical([sum(init(1 : l_N2)) sum(l_N2 + 1 : l_N2 + l_O2) ...
                    init(l_mol) init(l_mol + 1) init(l_c)] , T_cr);
-v_cr = v_cr + v_cr*0.5;
+v_cr = v_cr + v_cr*0.2;
 
-v_cr = 5000;
+%v_cr = 1607.84;
+%v_cr = [1360.6 1607.84 1360.6 1607.84 1360.6 1607.84];
 
 %options = odeset('AbsTol', 1e-52, 'RelTol', 2.3e-14, 'OutputFcn', @odeplot, 'OutputSel', l_T);
 options=odeset('AbsTol', 1e-54, 'RelTol', 2.3e-14,'Stats', 'on', 'OutputFcn', @odeplot, 'BDF', 'on', 'OutputSel', l_T);
@@ -73,6 +74,7 @@ u_O2 = zeros(length(xr),length(i_O2));
 figure(2)
 
 for i = 1 : length(xr)
+    
     for g = 1 : length(i_N2)
         u_N2(i,g) = interp1q(X,n_i_N2(:,g),xr(i));
     end

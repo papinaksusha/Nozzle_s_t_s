@@ -25,7 +25,7 @@ r0 = [3.621 3.458 3.47 3.298 2.75].*1e-10;                                 % m, 
 r0 = diag(r0);
 eps = [97.5 107.4 119 71.4 80];                                            % eps/k, K, eps -- the minimum value of the potential (the depth of the potential well)
 eps = diag(eps);
-%re = [1.097 1.207 1.151].*1e-10;% для Z0 зависящего от диаметра
+re = [1.097 1.207 1.151].*1e-10;% для Z0 зависящего от диаметра
 
 for y = 1 : 5
     for j = 1 : 5
@@ -39,19 +39,18 @@ end
 Z0 = 3;                                                                    % the steric factor
 
 mu = M(sp).*M./(M(sp) + M);                                                % kg, the reduced oscillator mass
-omega = 2*pi*C*(W(sp) - 2*WX(sp));                                         % c^-1, the angular frequency of the oscillator  
+omega = 2*pi*C*(W(sp));% - 2*WX(sp));                                         % c^-1, the angular frequency of the oscillator  
 alpha = 17.5./r0(sp,:);                                                    % m-1
 hi = ((0.5*pi^2*omega^2/K/T).*mu./(alpha.^2)).^(1/3);
 R = (0.5.*sqrt(1 + hi.*T./eps(sp,:)) + 0.5).^(-1/3);                       % (r/r0)^2
 
-%r = r0(sp,:).*(0.5.*sqrt(1 + hi.*T./eps(sp,:) + 0.5)).^(-1/6);
+r = r0(sp,:).*(0.5.*sqrt(1 + hi.*T./eps(sp,:) + 0.5)).^(-1/6);
 %Z0 = (alpha.*re(sp)).^2.*exp(-3/8.*alpha.*re(sp).^2./r); % так приблизительно сходится P10 c wavevibr
 
 P10 = 1.294.*R./Z0./(1 + 1.1.*eps(sp,:)./T).*8.*pi^3.*mu.*omega./...       % the averaged probability for the VT transition A(1) + B -> A(0) + B
       alpha.^2./H.*sqrt(4*pi/3.*hi).*exp(-3.*hi + H*omega/4/pi/K/T + eps(sp,:)./T);
-Zn = (d(sp) + d).^2.*sqrt(pi*K*T/2./mu);                                   % collision frequency per unit number density
+Zn = (d(sp) + d).^2.*sqrt(pi*K*T/2./mu);                                  % collision frequency per unit number density
 k10 = P10.*Zn;
-%VT_N2_to_O2 = P10(1)/P10(2)
 
 i = {0 : I(SW_O,1) - 1, 0 : I(SW_O,2) - 1, 0 : I(SW_O,3) - 1};
 dE = H*C.*WX(sp);
@@ -69,7 +68,6 @@ else
         deltaVT(l) = 4.*gamma0(fix((l - 1)./I(SW_O,sp)) + 1).^(2/3).*dE./E1;
         deltaVT(ll) = 4/3.*gamma0(fix((ll - 1)./I(SW_O,sp)) + 1).*dE./E1;
         VT = (cell2mat(i(sp)) + 1)'*k10.*exp((ones(1,5)'*cell2mat(i(sp)))'.*deltaVT).*exp(-(ones(1,5)'*cell2mat(i(sp)))'.*H*C*WX(sp)/K/T);
-
 end
 
 % VV & VV'
@@ -82,8 +80,6 @@ lambda2 = 0.5;
 
 Q1001 = lambda1^2*lambda2^2*4.*alpha(1:3).^2.*K.*T./omega^2./m_r(sp);      % the averaged probability for the VV transition A(1) + B(0) -> A(0) + B(1)
 k1001 = Q1001.*Zn(1:3);
-
-%VV_N2_to_O2 = Q1001(1)/Q1001(2)
 
 VV = cell(1,3);                                                            
 
@@ -116,8 +112,6 @@ else
      end
 end
 
-%N2 = P10(1)/Q1001(1)
-%O2 = P10(2)/Q1001(2)
 
 VV_N2 = cell2mat(VV(1));
 VV_O2 = cell2mat(VV(2));

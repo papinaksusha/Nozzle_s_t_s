@@ -31,7 +31,7 @@ VT = 1;
 
 SW_O = 2;                                                                  % switch on oscillator, 1 -  harmonic oscillator; 2 -  anharmonic oscillator
 SW_N = 1;                                                                  % switcn on nozzle
-EX_MODEL = 2;                                                              % exchange rate coefficients model
+EX_MODEL = 3;                                                              % exchange rate coefficients model
 REC = 1;                                                                   % rec = 0 - without recombination   
 
 switch SW_O 
@@ -51,7 +51,10 @@ fig = 1;
 % TEST_SSH_ALEX
 % TEST_DISS_TM;
 % TEST_EXCHANGE
- VVprobability_compare
- 
-% call5;
+% VVprobability_compare
+% KAPPAcompare
+
+ call5;
 % call2;
+% call5_1T
+% call5_NO
